@@ -7,38 +7,32 @@ class VillesController < ApplicationController
     @villes = Ville.all
   end
   
-   def toCelsus(fTemp)
-  if fTemp
-    return (fTemp - 32.0) * 5.0 / 9.0
-  else
-    return nil
-  end
- end
+
 
   # GET /villes/1
   # GET /villes/1.json
   def show
-    forecast = ForecastIO.forecast(@ville.latitude, @ville.longitude)
+    forecast = ForecastIO.forecast(@ville.latitude, @ville.longitude, params:{units:'si'})
      weatherOk = false
      temperatureOk = false
      if forecast
        todayForecast = forecast.currently
        if todayForecast
          if todayForecast.summary
-           @weather = todayForecast.summary
+           @weather_var = todayForecast.summary
            weatherOk = true
          end
          if todayForecast.temperature
-           @temp = toCelsus(todayForecast.temperature)
+           @temp_var = todayForecast.temperature
            temperatureOk = true
          end
        end
      end
      if !weatherOk
-       @weather= "Unavailable"
+       @weather_var= "Unavailable"
      end
      if !temperatureOk
-       @temp = "Unavailable"
+       @temp_var = "Unavailable"
      end
     
   end

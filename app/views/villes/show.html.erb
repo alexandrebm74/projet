@@ -22,7 +22,7 @@
 
 <p>
   <strong>Temperature:</strong>
-  <%= % @temp_var %> &deg;F
+  <%= '%.2f' % @temp_var %> &deg;C
 </p>
 
 <%= link_to 'Edit', edit_ville_path(@ville) %> |
