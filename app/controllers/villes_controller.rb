@@ -12,6 +12,8 @@ class VillesController < ApplicationController
   # GET /villes/1
   # GET /villes/1.json
   def show
+   
+    
     forecast = ForecastIO.forecast(@ville.latitude, @ville.longitude, params:{units:'si'})
      weatherOk = false
      temperatureOk = false
@@ -34,6 +36,7 @@ class VillesController < ApplicationController
      if !temperatureOk
        @temp_var = "Unavailable"
      end
+     
     
   end
   
